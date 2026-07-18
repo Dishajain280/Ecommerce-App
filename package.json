@@ -12,6 +12,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://Dishajain280.github.io/Ecommerce-app/",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

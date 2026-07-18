@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../shopContext/shopContext.jsx";
 
-const navbar = () => {
+const Navbar = () => {
   const { quantity } = useContext(ShopContext);
 
   return (
@@ -32,4 +32,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;

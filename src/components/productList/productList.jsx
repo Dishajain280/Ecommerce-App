@@ -4,7 +4,7 @@ import { ShopContext } from "../shopContext/shopContext.jsx";
 import "./productList.css";
 import { Link } from "react-router-dom";
 
-const productList = () => {
+const ProductList = () => {
   const { products, addToCart } = useContext(ShopContext);
 
   return (
@@ -15,7 +15,7 @@ const productList = () => {
           {products.map((product) => {
             const { id, image, name, price } = product;
             return (
-              <div className="product-card">
+              <div className="product-card" key={id}>
                 <Link to={`/product/${product.id}`}>
                   <img src={image} alt={name} />
                 </Link>
@@ -35,4 +35,4 @@ const productList = () => {
   );
 };
 
-export default productList;
+export default ProductList;

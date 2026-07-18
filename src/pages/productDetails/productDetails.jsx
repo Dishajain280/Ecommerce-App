@@ -5,13 +5,18 @@ import { productsData } from "../../assets/data.jsx";
 import { useParams } from "react-router-dom";
 import "./productDetails.css";
 
-const productDetails = () => {
+const ProductDetails = () => {
   const { addToCart } = useContext(ShopContext);
 
   const { id } = useParams();
+  const productId = parseInt(id, 10);
   const product = productsData.find((product) => {
-    return product.id === parseInt(id);
+    return product.id === productId;
   });
+
+  if (!product) {
+    return <div className="product-detail">Product not found.</div>;
+  }
 
   return (
     <div>
@@ -23,11 +28,13 @@ const productDetails = () => {
           <h3>{product.name}</h3>
           <p className="p-price">${product.price}</p>
           <p className="p-description">{product.description}</p>
-          <button onClick={() => addToCart(product, id)}>Add to Cart</button>
+          <button onClick={() => addToCart(product, productId)}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default productDetails;
+export default ProductDetails;

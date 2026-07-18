@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 
 const ShopContext = createContext();
 
@@ -8,44 +8,34 @@ import { toast } from "react-toastify";
 export { ShopContext };
 
 export const ShopContextProvider = ({ children }) => {
-  const [products, setProducts] = useState(productsData);
+  const products = productsData;
 
   const [cart, setCart] = useState([]);
 
-  const [quantity, setQuantity] = useState(0);
-  const [total, setTotal] = useState(0);
+  const quantity = cart.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.amount;
+  }, 0);
 
-  useEffect(() => {
-    const total = cart.reduce((accumulator, currentItem) => {
-      const priceAsNumber = parseFloat(currentItem.price);
-      if (isNaN(priceAsNumber)) {
-        return accumulator;
-      }
-      return accumulator + priceAsNumber * currentItem.amount;
-    }, 0);
-    setTotal(total);
-  }, [cart]);
-
-  useEffect(() => {
-    if (cart) {
-      const amount = cart.reduce((accumulator, currentItem) => {
-        return accumulator + currentItem.amount;
-      }, 0);
-      setQuantity(amount);
+  const total = cart.reduce((accumulator, currentItem) => {
+    const priceAsNumber = parseFloat(currentItem.price);
+    if (isNaN(priceAsNumber)) {
+      return accumulator;
     }
-  }, [cart]);
+    return accumulator + priceAsNumber * currentItem.amount;
+  }, 0);
 
   const addToCart = (product, id) => {
+    const productId = typeof id === "string" ? parseInt(id, 10) : id;
     const newItem = { ...product, amount: 1 };
 
     const cartItem = cart.find((item) => {
-      return item.id === id;
+      return item.id === productId;
     });
 
     if (cartItem) {
-      const newCart = [...cart].map((item) => {
-        if (item.id === id) {
-          return { ...item, amount: cartItem.amount };
+      const newCart = cart.map((item) => {
+        if (item.id === productId) {
+          return { ...item, amount: item.amount + 1 };
         } else {
           return item;
         }
@@ -71,12 +61,13 @@ export const ShopContextProvider = ({ children }) => {
   };
 
   const increaseQuantity = (id) => {
+    const productId = typeof id === "string" ? parseInt(id, 10) : id;
     const cartItem = cart.find((item) => {
-      return item.id === id;
+      return item.id === productId;
     });
     if (!cartItem) return;
     const newCart = cart.map((item) => {
-      if (item.id === id) {
+      if (item.id === productId) {
         return { ...item, amount: cartItem.amount + 1 };
       } else {
         return item;
@@ -86,23 +77,25 @@ export const ShopContextProvider = ({ children }) => {
   };
 
   const decreaseQuantity = (id) => {
+    const productId = typeof id === "string" ? parseInt(id, 10) : id;
     const cartItem = cart.find((item) => {
-      return item.id === id;
+      return item.id === productId;
     });
-    if (cartItem) {
-      const newCart = cart.map((item) => {
-        if (item.id === id) {
-          return { ...item, amount: cartItem.amount - 1 };
-        } else {
-          return item;
-        }
-      });
-      setCart(newCart);
-    } else {
-      if (cartItem.amount < 2) {
-        removeFromCart(id);
-      }
+    if (!cartItem) return;
+
+    if (cartItem.amount < 2) {
+      removeFromCart(productId);
+      return;
     }
+
+    const newCart = cart.map((item) => {
+      if (item.id === productId) {
+        return { ...item, amount: cartItem.amount - 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(newCart);
   };
 
   return (
