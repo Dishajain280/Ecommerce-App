@@ -1,16 +1,54 @@
-# React + Vite
+# 🛒 Online Store Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce frontend built with React, featuring product browsing, cart management, and dynamic price calculations.  
+This project demonstrates how to build a scalable shopping interface with **React hooks, Context API, and derived state logic**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **Product listing** with dynamic rendering  
+- **Category filtering** for easy browsing  
+- **Search bar** to quickly find products  
+- **Add to cart** functionality  
+- **Cart page** with product details  
+- **Quantity update** for items in cart  
+- **Price calculation** with totals and subtotals  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧠 Skills Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ **useContext** for cart state management  
+- ✅ **useReducer** for handling cart actions  
+- ✅ **React Router** for navigation between pages  
+- ✅ **Derived state logic** for totals, filters, and cart updates  
+- ✅ **Dynamic rendering** of products and cart items  
+
+---
+
+## 🛠️ Usage Guide
+Navigate to Home Page → Browse products
+
+Use Search Bar → Find products by name
+
+Apply Category Filter → Narrow down product list
+
+Click Add to Cart → Add items to shopping cart
+
+Go to Cart Page → Update quantity, view totals, remove items
+
+## 🌟 Future Enhancements
+User authentication (login/signup)
+
+Wishlist functionality
+
+Checkout flow with payment integration
+
+Responsive design improvements
+
+Backend API integration for real products
+
+Sorting options (price, popularity, rating)
+
+Persistent cart using LocalStorage or IndexedDB
