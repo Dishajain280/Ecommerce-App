@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Dishajain280.github.io/Ecommerce-app.git/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
